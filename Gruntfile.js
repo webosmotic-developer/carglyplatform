@@ -375,6 +375,12 @@ module.exports = function (grunt) {
                     dest: '<%= yeoman.dist %>/public'
                 }, {
                     expand: true,
+                    dot: true,
+                    cwd: '<%= yeoman.client %>/bower_components/ngWYSIWYG/dist/',
+                    src: ['images/*.*'],
+                    dest: '<%= yeoman.dist %>/public/app'
+                }, {
+                    expand: true,
                     cwd: '.tmp/images',
                     dest: '<%= yeoman.dist %>/public/assets/images',
                     src: ['generated/*']
