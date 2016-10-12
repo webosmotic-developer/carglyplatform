@@ -1,0 +1,47 @@
+<md-content ng-cloak ng-init="fnInitTemplate()" layout="column" layout-fill flex>
+    <md-toolbar class="md-whiteframe-2dp md-hue-1">
+        <div class="md-toolbar-tools">
+            <h2 ng-bind="template._id ? 'Update Template' : 'Add Template'"></h2>
+            <span flex=""></span>
+            <md-button class="md-fab md-mini md-primary" aria-label="Back" ui-sref="main.templates">
+                <md-tooltip md-direction="left">
+                    Back to templates
+                </md-tooltip>
+                <md-icon md-font-set="fa fa-lg fa-arrow-left"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <div layout="column" layout-fill flex>
+        <md-content>
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Template Editor">
+                    <md-content class="md-padding">
+                        <form name="templateForm" ng-submit="templateForm.$valid && fnAddTemplate(template)" novalidate>
+                            <md-input-container class="md-block m-t-20">
+                                <label>Enter template email</label>
+                                <input type="email" name="email" ng-model="template.email" ng-disabled="template._id"
+                                       required>
+
+                                <div ng-messages="templateForm.email.$error">
+                                    <div ng-message="required">This is required.</div>
+                                    <div ng-message="email">This field must be a valid email address.</div>
+                                </div>
+                            </md-input-container>
+                            <wysiwyg-edit content="template.html"></wysiwyg-edit>
+                            <div layout="row">
+                                <span flex></span>
+                                <md-button type="submit" class="md-raised md-primary" aria-label="submit">
+                                    <span ng-bind="template._id ? 'Update' : 'Add'"></span></md-button>
+                            </div>
+                        </form>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Template Preview">
+                    <md-content class="md-padding">
+                        <div ng-bind-html="fnTrustAsHtml(template.html)"></div>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+    </div>
+</md-content>

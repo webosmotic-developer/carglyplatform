@@ -1,0 +1,62 @@
+<section layout="column">
+    <md-toolbar class="md-whiteframe-2dp">
+        <div class="md-toolbar-tools">
+            <md-button ng-click="fnToggleLeft()" class="md-icon-button" aria-label="Settings" ng-if="isLoggedIn()">
+                <md-icon md-font-set="fa fa-lg fa-fw fa-bars m-t-5"></md-icon>
+            </md-button>
+            <h2 ui-sref="main.home"><a href="javascript:void(0);">Cargly Platform</a></h2>
+            <span flex=""></span>
+            <md-button ui-sref="main.login" ng-hide="isLoggedIn()">
+                <md-icon md-font-set="fa fa-lg fa-fw fa-sign-in"></md-icon>
+                Login
+            </md-button>
+            <md-menu ng-if="isLoggedIn()">
+                <md-button aria-label="menu" class="md-icon-button"
+                           ng-click="fnOpenMenu($mdOpenMenu, $event)">
+                    <md-icon md-font-set="fa fa-lg fa-fw fa-ellipsis-v m-t-5"></md-icon>
+                </md-button>
+                <md-menu-content width="3">
+                    <md-menu-item>
+                        <md-button ui-sref="main.settings">
+                            <md-icon md-font-set="fa fa-lg fa-fw fa-cog m-t-16 m-r-5"></md-icon>
+                            Settings
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-divider></md-menu-divider>
+                    <md-menu-item ng-show="isLoggedIn()">
+                        <md-button ng-click="fnLogout()">
+                            <md-icon md-font-set="fa fa-lg fa-fw fa-sign-out m-r-5"></md-icon>
+                            Logout
+                        </md-button>
+                    </md-menu-item>
+
+                </md-menu-content>
+            </md-menu>
+        </div>
+    </md-toolbar>
+
+    <md-sidenav class="md-sidenav-left md-whiteframe-2dp" md-component-id="left">
+        <md-toolbar class="md-tall md-accent">
+
+            <div ng-if="isLoggedIn()" layout="column" layout-padding class="profile-container">
+                <div flex></div>
+                <div layout-padding layout="column">
+                    <div class="profile-name">{{ getCurrentUser().name }}</div>
+                    <div class="profile-email">{{ getCurrentUser().email }}</div>
+                </div>
+            </div>
+
+        </md-toolbar>
+        <md-content class="navigation-list">
+            <md-list ng-click="fnToggleLeft()" ng-cloak flex>
+                <md-list-item ui-sref="main.templates" ui-sref-active="active">
+                    <md-icon md-font-set="fa fa-lg fa-fw fa-html5 m-t-16 m-r-5"></md-icon>
+                    <p>Templates</p>
+                </md-list-item>
+            </md-list>
+            <md-divider></md-divider>
+        </md-content>
+    </md-sidenav>
+
+    <div layout="column" layout-fill ui-view flex></div>
+</section>

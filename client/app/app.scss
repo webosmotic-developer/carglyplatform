@@ -1,0 +1,15 @@
+/**
+ * App-wide Styles
+ */
+
+.active{
+    background-color: #2196F3;
+    color: #fff;
+}
+
+// Component styles are injected through grunt
+// injector
+@import 'account/account.scss';
+@import 'scss/margin.padding.scss';
+@import 'main/main.scss';
+// endinjector

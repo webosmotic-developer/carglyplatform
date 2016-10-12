@@ -1,0 +1,31 @@
+<md-content class="md-padding">
+    <md-card class="login-card">
+        <md-card-content>
+            <h2 layout="row" layout-align="center center">Login</h2>
+            <form name="loginForm" ng-submit="loginForm.$valid && fnLogin(userObj)" novalidate>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Email</label>
+                    <md-icon class="md-primary" md-font-set="fa fa-lg fa-fw fa-envelope m-t-10"></md-icon>
+                    <input required type="email" name="email" ng-model="userObj.email">
+                    <div ng-messages="loginForm.email.$error">
+                    <div ng-message="required">This is required.</div>
+                    <div ng-message="email">This field must be a valid email address.</div>
+                </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Password</label>
+                    <md-icon class="md-primary" md-font-set="fa fa-lg fa-fw fa-lock m-t-10"></md-icon>
+                    <input required type="password" name="password" ng-model="userObj.password">
+
+                    <div ng-messages="loginForm.password.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+                <div layout="row">
+                    <md-button class="md-raised md-primary" type="submit">Login</md-button>
+                    <md-button ui-sref="main.register">Register</md-button>
+                </div>
+            </form>
+        </md-card-content>
+    </md-card>
+</md-content>

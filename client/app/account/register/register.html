@@ -1,0 +1,52 @@
+<md-content class="md-padding">
+    <md-card class="register-card">
+        <md-card-content>
+            <h2 layout="row" layout-align="center center">Register</h2>
+            <form name="signUpForm" ng-submit="signUpForm.$valid && fnRegister(userObj)" novalidate>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Name</label>
+                    <md-icon class="md-primary" md-font-set="fa fa-lg fa-fw fa-user m-t-10"></md-icon>
+                    <input required name="name" ng-model="userObj.name">
+
+                    <div ng-messages="signUpForm.name.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Email</label>
+                    <md-icon class="md-primary" md-font-set="fa fa-lg fa-fw fa-envelope m-t-10"></md-icon>
+                    <input required name="email" type="email" ng-model="userObj.email">
+
+                    <div ng-messages="signUpForm.email.$error">
+                        <div ng-message="required">This is required.</div>
+                        <div ng-message="email">This field must be a valid email address.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Password</label>
+                    <md-icon class="md-primary" md-font-set="fa fa-lg fa-fw fa-lock m-t-10"></md-icon>
+                    <input required type="password" name="password" ng-model="userObj.password">
+
+                    <div ng-messages="signUpForm.password.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Confirm Password</label>
+                    <md-icon class="md-primary" md-font-set="fa fa-lg fa-fw fa-check-square-o m-t-10"></md-icon>
+                    <input required type="password" name="confirmPassword" ng-model="confirmPassword"
+                           compare-to="userObj.password">
+
+                    <div ng-messages="signUpForm.confirmPassword.$error">
+                        <div ng-message="required">This is required.</div>
+                        <div ng-message="compareTo">Password didn't match</div>
+                    </div>
+                </md-input-container>
+                <div layout="row">
+                    <md-button class="md-raised md-primary" type="submit">Register</md-button>
+                    <md-button ui-sref="main.login">Login</md-button>
+                </div>
+            </form>
+        </md-card-content>
+    </md-card>
+</md-content>

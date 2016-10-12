@@ -1,0 +1,23 @@
+md-sidenav.md-sidenav-left{
+    width: 250px;
+    .navigation-list{
+        .md-button{
+            margin: 0;
+        }
+    }
+}
+
+.md-toolbar-tools {
+    .reminder {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        padding: 2px;
+        background-color: #FF0000;
+        border-radius: 99%;
+        height: 15px;
+        width: 15px;
+        line-height: 1;
+        font-size: 11px;
+    }
+}

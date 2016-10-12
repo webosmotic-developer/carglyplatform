@@ -1,0 +1,118 @@
+<md-content class="md-padding" ng-init="fnInitSettings()">
+    <div layout="row" layout-sm="column" layout-xs="column">
+        <div class="md-margin md-whiteframe-2dp" layout="column" flex>
+            <md-toolbar class="md-whiteframe-2dp md-hue-1">
+                <div class="md-toolbar-tools">
+                    <h2>Update Profile</h2>
+                </div>
+            </md-toolbar>
+            <div class="md-padding" layout="column">
+                <form name="updateProfileForm" ng-submit="updateProfileForm.$valid && fnUpdateProfile(userObj)"
+                      novalidate>
+                    <md-input-container class="md-icon-float md-block">
+                        <label>Name</label>
+                        <md-icon class="md-primary" md-font-set="fa fa-lg fa-fw fa-user m-t-10"></md-icon>
+                        <input name="name" ng-model="userObj.name" required>
+
+                        <div ng-messages="updateProfileForm.name.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-icon-float md-block">
+                        <label>Email</label>
+                        <md-icon class="md-primary" md-font-set="fa fa-lg fa-fw fa-envelope m-t-10"></md-icon>
+                        <input name="email" type="email" ng-model="userObj.email" required>
+
+                        <div ng-messages="updateProfileForm.email.$error">
+                            <div ng-message="required">This is required.</div>
+                            <div ng-message="email">This field must be a valid email address.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-icon-float md-block">
+                        <label>Role</label>
+                        <md-icon class="md-primary" md-font-set="fa fa-lg fa-fw fa-lock m-t-10"></md-icon>
+                        <input name="role" ng-model="userObj.role" ng-readonly="true" required>
+
+                        <div ng-messages="updateProfileForm.role.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <div layout="row">
+                        <md-button class="md-raised md-primary" type="submit" aria-label="submit">Update</md-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="md-margin md-whiteframe-2dp" layout="column" flex>
+            <md-toolbar class="md-whiteframe-2dp md-hue-1">
+                <div class="md-toolbar-tools">
+                    <h2>Change Password</h2>
+                </div>
+            </md-toolbar>
+            <div class="md-padding" layout="column">
+                <form name="changePasswordForm" ng-submit="changePasswordForm.$valid && fnChangePassword(userObj)"
+                      novalidate>
+                    <md-input-container class="md-icon-float md-block">
+                        <label>Old Password</label>
+                        <md-icon class="md-primary" md-font-set="fa fa-lg fa-fw fa-lock m-t-10"></md-icon>
+                        <input type="password" name="oldPassword" ng-model="userObj.oldPassword" required>
+
+                        <div ng-messages="changePasswordForm.oldPassword.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-icon-float md-block">
+                        <label>New Password</label>
+                        <md-icon class="md-primary" md-font-set="fa fa-lg fa-fw fa-lock m-t-10"></md-icon>
+                        <input type="password" name="newPassword" class="form-control"
+                               ng-model="userObj.newPassword" ng-minlength="3" required/>
+
+
+                        <div ng-messages="changePasswordForm.newPassword.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-icon-float md-block">
+                        <label>Confirm Password</label>
+                        <md-icon class="md-primary" md-font-set="fa fa-lg fa-fw fa-check-square-o m-t-10"></md-icon>
+                        <input required type="password" name="confirmPassword" ng-model="confirmPassword"
+                               compare-to="userObj.newPassword">
+
+                        <div ng-messages="changePasswordForm.confirmPassword.$error">
+                            <div ng-message="required">This is required.</div>
+                            <div ng-message="compareTo">Password didn't match</div>
+                        </div>
+                    </md-input-container>
+                    <div layout="row">
+                        <md-button class="md-raised md-primary" type="submit" aria-label="submit">Save changes</md-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="users-settings-container" layout="row" layout-sm="column" ng-if="isAdmin">
+        <div class="md-margin md-whiteframe-2dp" flex>
+            <md-toolbar class="md-whiteframe-2dp md-hue-1">
+                <div class="md-toolbar-tools">
+                    <h2>Users</h2>
+                    <span flex></span>
+                    <md-button class="md-fab md-mini md-primary" aria-label="AddUser" ng-click="fnOpenAddUserDialog($event)">
+                        <md-icon md-font-set="fa fa-2x fa-plus"></md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <div class="md-padding" layout="column">
+                <md-list-item ng-repeat="user in users" class="noright"
+                              ng-if="userObj._id !== user._id">
+                    <p>{{ user.name }}</p>
+                    <md-icon md-font-set="fa fa-lg fa-fw fa-trash" ng-click="fnDeleteUser($event, user._id)" aria-label="delete"
+                             class="md-warn"></md-icon>
+                    <md-icon md-font-set="fa fa-lg fa-fw fa-pencil" ng-click="fnOpenAddUserDialog($event, user)" aria-label="delete"
+                             class="md-primary"></md-icon>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+            </div>
+        </div>
+    </div>
+</md-content>

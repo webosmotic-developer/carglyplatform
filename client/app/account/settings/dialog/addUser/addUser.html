@@ -1,0 +1,65 @@
+<md-dialog aria-label="Mango (Fruit)" flex="60">
+    <form name="addUserForm" ng-submit="addUserForm.$valid && fnSaveUser(userObj)" novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 ng-bind="userObj._id ? 'Update User' : 'Add User'"></h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="fnCloseDialog()" aria-label="close">
+                    <md-icon md-font-set="fa fa-lg fa-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-padding" layout="column">
+                <md-input-container class="md-block m-b-0">
+                    <label>Name</label>
+                    <input required name="name" ng-model="userObj.name">
+
+                    <div ng-messages="addUserForm.name.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block m-b-0">
+                    <label>Email</label>
+                    <input required name="email" type="email" ng-model="userObj.email">
+
+                    <div ng-messages="addUserForm.email.$error">
+                        <div ng-message="required">This is required.</div>
+                        <div ng-message="email">This field must be a valid email address.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block m-b-0" ng-if="!userObj._id">
+                    <label>Password</label>
+                    <input required type="password" name="password" ng-model="userObj.password">
+
+                    <div ng-messages="addUserForm.password.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block m-b-0" ng-if="!userObj._id">
+                    <label>Confirm Password</label>
+                    <input required type="password" name="confirmPassword" ng-model="confirmPassword"
+                           compare-to="userObj.password">
+
+                    <div ng-messages="addUserForm.confirmPassword.$error">
+                        <div ng-message="required">This is required.</div>
+                        <div ng-message="compareTo">Password didn't match</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block m-b-0">
+                    <label>Role</label>
+                    <md-select ng-model="userObj.role">
+                        <md-option value="user">User</md-option>
+                        <md-option value="guest">Guest</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button type="submit" class="md-raised md-primary" aria-label="AddUser"><span
+                ng-bind="userObj._id ? 'Update' : 'Add'"></span>
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
